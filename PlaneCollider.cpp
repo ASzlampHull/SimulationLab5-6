@@ -23,11 +23,6 @@ void PlaneCollider::CalculateCollisionWithSphere(SphereCollider* sphereCollider,
 		sphereTransformations.position += planeNormal * penetrationDepth;
 		sphereCollider->UpdateTransformations(sphereTransformations);
 	}
-
-	float vDotN = glm::dot(velocity, planeNormal);
-	if (vDotN < 0.0f) {
-		velocity -= vDotN * planeNormal;
-	}
 }
 
 void PlaneCollider::CalculateCollisionWithPlane(PlaneCollider* planeCollider, glm::vec3& velocity)
