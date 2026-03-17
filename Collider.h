@@ -3,6 +3,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "ModelParserDataTypes.h"
 
+class SphereCollider;
+class PlaneCollider;
+
 class Collider
 {
 private:
@@ -16,6 +19,10 @@ public:
 	virtual ~Collider() = default;
 	virtual void Update(float deltaTime) = 0;
 	virtual void CalculateCollision(Collider* other, glm::vec3& velocity) = 0;
+
+	// Double dispatch methods
+	virtual void CalculateCollisionWithSphere(SphereCollider* sphereCollider, glm::vec3& velocity) = 0;
+	virtual void CalculateCollisionWithPlane(PlaneCollider* planeCollider, glm::vec3& velocity) = 0;
 
 	void UpdateTransformations(const Transformations& newTransformations) { transformations = newTransformations; }
 	void GetTransformations(Transformations& outTransformations) const { outTransformations = transformations; }

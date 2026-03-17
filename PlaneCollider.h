@@ -14,6 +14,8 @@ public:
 	virtual ~PlaneCollider() = default;
 	virtual void Update(float timeStep) override { }
 	virtual void CalculateCollision(Collider* other, glm::vec3& velocity) override;
+	virtual void CalculateCollisionWithSphere(SphereCollider* sphereCollider, glm::vec3& velocity) override;
+	virtual void CalculateCollisionWithPlane(PlaneCollider* planeCollider, glm::vec3& velocity) override;
 
 	const glm::vec3& GetNormal() const { return normal; }
 	float GetDistance() const { return distance; }

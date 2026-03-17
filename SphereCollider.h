@@ -11,5 +11,7 @@ public:
 	virtual ~SphereCollider() = default;
 	virtual void Update(float timeStep) override { }
 	virtual void CalculateCollision(Collider* other, glm::vec3& velocity) override;
+	virtual void CalculateCollisionWithSphere(SphereCollider* sphereCollider, glm::vec3& velocity) override;
+	virtual void CalculateCollisionWithPlane(PlaneCollider* planeCollider, glm::vec3& velocity) override;
 	float GetRadius() const { return radius; }
 };
