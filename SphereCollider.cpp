@@ -18,17 +18,28 @@ void SphereCollider::CalculateCollisionWithSphere(SphereCollider* sphereCollider
 	SphereToSphere sphereB(otherSphereTransformations.position, sphereCollider->GetRadius());
 
 	if (sphereA.Intersects(sphereB)) {
+		velocity = glm::vec3(0.0f); // Stop the sphere's velocity when it collides with another sphere. You can implement a more complex response if desired.
+		return;
+
 		glm::vec3 delta = sphereTransformations.position - otherSphereTransformations.position;
 		float distance = glm::length(delta);
+		if (distance == 0.0f) return; // Prevent division by zero
 		float penetrationDepth = radius + sphereCollider->GetRadius() - distance;
-		if (penetrationDepth > 0) {
-			glm::vec3 collisionNormal = glm::normalize(delta);
-			sphereTransformations.position += collisionNormal * penetrationDepth;
+		if (penetrationDepth > 0) {			
+			glm::vec3 collisionNormal = delta / distance;
+			// Move both spheres away from each other
+			sphereTransformations.position += collisionNormal * (penetrationDepth * 0.5f);
+			otherSphereTransformations.position -= collisionNormal * (penetrationDepth * 0.5f);
 			UpdateTransformations(sphereTransformations);
+			sphereCollider->UpdateTransformations(otherSphereTransformations);
+
+			// Reflect velocities for both spheres (simple elastic collision)
 			float vDotN = glm::dot(velocity, collisionNormal);
 			if (vDotN < 0.0f) {
-				velocity -= vDotN * collisionNormal;
+				velocity = glm::vec3(0.0f); // Stop the sphere's velocity when it collides with another sphere. You can implement a more complex response if desired.
+				//velocity -= vDotN * collisionNormal;				
 			}
+			// You need access to the other sphere's velocity to update it as well!
 		}
 	}
 }

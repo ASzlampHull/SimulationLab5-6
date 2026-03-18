@@ -12,6 +12,12 @@ void PhysicsObject::UpdateCollision(Collider* other) {
 	}
 }
 
+void PhysicsObject::UpdateTransformations(float timeStep)
+{
+	transformations.position += velocity * timeStep;
+	collider->UpdateTransformations(transformations);
+}
+
 void PhysicsObject::CalculateForces(float timeStep, glm::vec3 force)
 {
 	//Calculate Acceleration
@@ -20,9 +26,6 @@ void PhysicsObject::CalculateForces(float timeStep, glm::vec3 force)
 	//Calculate Velocity
 	velocity += acceleration * timeStep;
 
-	//Calculate Position
-	transformations.position += velocity * timeStep;
-	collider->UpdateTransformations(transformations);
 }
 
 void PhysicsObject::CreateSphereCollider(float radius) {

@@ -8,6 +8,7 @@ class ScenarioPhysicsObjects : public Scenario
 {
 private:
 	std::vector<PhysicsObject> physicsObjects;
+	float currentTimeStep = 0.0f;
 public:
 	ScenarioPhysicsObjects(Renderer* renderer) {
 		this->renderer = renderer;

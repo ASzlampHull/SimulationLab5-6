@@ -13,13 +13,14 @@ private:
 	std::unique_ptr<Collider> collider; // Use smart pointer
 
 public:
-	PhysicsObject(Transformations transformations, glm::vec3 velocity, float mass)
+	PhysicsObject(Transformations transformations, glm::vec3 velocity, float mass) // TODO: Add bool to make static or dynamic object, and only apply forces if dynamic
 		: transformations(transformations), velocity(velocity), mass(mass) {
 	}
 
 	void Update(float deltaTime, glm::vec3 force);
 	void UpdateCollision(Collider* other);
-	void CalculateForces(float deltaTime, glm::vec3 force);
+	void UpdateTransformations(float timeStep);
+	void CalculateForces(float timeStep, glm::vec3 force);
 	void CreateSphereCollider(float radius);
 	void CreatePlaneCollider(const glm::vec3& normal, float distance);
 

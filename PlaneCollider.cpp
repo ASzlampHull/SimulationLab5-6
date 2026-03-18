@@ -19,9 +19,10 @@ void PlaneCollider::CalculateCollisionWithSphere(SphereCollider* sphereCollider,
 	float distanceFromPlane = glm::dot(planeNormal, spherePosition) - planeDistance;
 
 	if (distanceFromPlane < sphereRadius) {
-		float penetrationDepth = sphereRadius - distanceFromPlane;
+		velocity = glm::vec3(0.0f); // Stop the sphere's velocity when it collides with the plane. You can implement a more complex response if desired.
+		/*float penetrationDepth = sphereRadius - distanceFromPlane;
 		sphereTransformations.position += planeNormal * penetrationDepth;
-		sphereCollider->UpdateTransformations(sphereTransformations);
+		sphereCollider->UpdateTransformations(sphereTransformations);*/
 	}
 }
 
