@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "SphereCollider.h"
 #include "PlaneCollider.h"
+#include <glm/gtc/quaternion.hpp>
 
 class PhysicsObject
 {
@@ -10,20 +11,22 @@ private:
 	Transformations transformations;
 	glm::vec3 velocity;
 	glm::vec3 angularVelocity;
+	glm::quat orientation;
 	float mass;
 	bool isStatic; // Add a flag to indicate if the object is static or dynamic
 	std::unique_ptr<Collider> collider; // Use smart pointer
 
 public:
-	PhysicsObject(Transformations transformations, glm::vec3 velocity, glm::vec3 angularVelocity, float mass, bool isStatic = false)
-		: transformations(transformations), velocity(velocity), angularVelocity(angularVelocity), mass(mass), isStatic(isStatic)
+	PhysicsObject(Transformations transformations, glm::vec3 velocity, glm::vec3 angularVelocity, glm::quat orientation, float mass, bool isStatic = false)
+		: transformations(transformations), velocity(velocity), angularVelocity(angularVelocity), orientation(orientation), mass(mass), isStatic(isStatic)
 	{
 	}
 
 	void Update(float deltaTime, glm::vec3 force);
 	void UpdateCollision(Collider* other);
 	void UpdateTransformations(float timeStep);
-	void CalculateForces(float timeStep, glm::vec3 force);
+	void ApplyForces(float timeStep, glm::vec3 force);
+	void ApplyAngularForces(float timeStep, glm::vec3 force);
 	void CreateSphereCollider(float radius);
 	void CreatePlaneCollider(const glm::vec3& normal, float distance);
 

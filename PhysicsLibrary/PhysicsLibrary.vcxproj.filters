@@ -36,6 +36,9 @@
     <ClInclude Include="LinePoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RotateSphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicsLibrary.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LinePoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

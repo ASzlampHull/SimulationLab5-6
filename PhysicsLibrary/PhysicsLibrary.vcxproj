@@ -150,6 +150,7 @@
     <ClInclude Include="LinePoint.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PointToPlane.h" />
+    <ClInclude Include="RotateSphere.h" />
     <ClInclude Include="SphereLine.h" />
     <ClInclude Include="SpherePlane.h" />
     <ClInclude Include="SphereToSphere.h" />
@@ -164,6 +165,7 @@
     </ClCompile>
     <ClCompile Include="PhysicsLibrary.cpp" />
     <ClCompile Include="PointToPlane.cpp" />
+    <ClCompile Include="RotateSphere.cpp" />
     <ClCompile Include="SphereLine.cpp" />
     <ClCompile Include="SpherePlane.cpp" />
     <ClCompile Include="SphereToSphere.cpp" />

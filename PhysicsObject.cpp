@@ -1,8 +1,9 @@
 #include "PhysicsObject.h"
+#include "PhysicsLibrary/pch.h"
 
 void PhysicsObject::Update(float timeStep, glm::vec3 force)
 {
-	CalculateForces(timeStep, force);
+	ApplyForces(timeStep, force);
 }
 
 void PhysicsObject::UpdateCollision(Collider* other) {
@@ -15,11 +16,11 @@ void PhysicsObject::UpdateCollision(Collider* other) {
 void PhysicsObject::UpdateTransformations(float timeStep)
 {
 	transformations.position += velocity * timeStep;
-	// TODO: Add rotation based on angular velocity if needed.
+	transformations.rotation += angularVelocity * timeStep;
 	collider->UpdateTransformations(transformations);
 }
 
-void PhysicsObject::CalculateForces(float timeStep, glm::vec3 force)
+void PhysicsObject::ApplyForces(float timeStep, glm::vec3 force)
 {
 	if (isStatic) {
 		return; // Static objects do not respond to forces
@@ -30,6 +31,18 @@ void PhysicsObject::CalculateForces(float timeStep, glm::vec3 force)
 
 	//Calculate Velocity
 	velocity += acceleration * timeStep;
+}
+
+void PhysicsObject::ApplyAngularForces(float timeStep, glm::vec3 force)
+{
+	if (isStatic) {
+		return; // Static objects do not respond to forces
+	}
+	RotateSphere sphere = RotateSphere(mass, 1.0f, transformations.position, velocity, orientation, angularVelocity);
+
+	sphere.ApplyToque(force, timeStep);
+	angularVelocity = sphere.GetAngularVelocity();
+	orientation = sphere.GetOrientation();
 }
 
 void PhysicsObject::CreateSphereCollider(float radius) {

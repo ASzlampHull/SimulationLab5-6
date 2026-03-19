@@ -14,5 +14,6 @@
 #include "SphereLine.h"
 #include "SpherePlane.h"
 #include "LinePoint.h"
+#include "RotateSphere.h"
 
 #endif //PCH_H

@@ -32,9 +32,9 @@ void ScenarioPhysicsObjects::CreatePhysicsObjects()
 		const auto& model = pair.second;
 		Transformations transform = model.GetTransformations();
 		
-		physicsObjects.push_back(PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), 1.0f));
+		physicsObjects.push_back(PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), glm::quat(1.0f, 0.0f, 0.0f, 0.0f), 1.0f));
 		if (i == 2) { // Make the plane static
-			physicsObjects.back() = PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), 1.0f, true);
+			physicsObjects.back() = PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), glm::quat(1.0f, 0.0f, 0.0f, 0.0f), 1.0f, true);
 		}
 		i++;
 	}
@@ -48,7 +48,12 @@ void ScenarioPhysicsObjects::UpdatePhysicsObjects()
 {
 	glm::vec3 gravityForce = glm::vec3(0.0f, 9.81f, 0.0f);
 	for (size_t i = 0; i < physicsObjects.size(); ++i) {		
-		physicsObjects[i].Update(currentTimeStep, gravityForce);
+		physicsObjects[i].ApplyForces(currentTimeStep, gravityForce);
+	}
+
+	glm::vec3 angularForce = glm::vec3(0.0f, 0.0f, 1.0f); // Example angular force around Z-axis
+	for (size_t i = 0; i < physicsObjects.size(); ++i) {
+		physicsObjects[i].ApplyAngularForces(currentTimeStep, angularForce);
 	}
 
 	// Checks for collisions between objects
