@@ -15,17 +15,21 @@ void PhysicsObject::UpdateCollision(Collider* other) {
 void PhysicsObject::UpdateTransformations(float timeStep)
 {
 	transformations.position += velocity * timeStep;
+	// TODO: Add rotation based on angular velocity if needed.
 	collider->UpdateTransformations(transformations);
 }
 
 void PhysicsObject::CalculateForces(float timeStep, glm::vec3 force)
 {
+	if (isStatic) {
+		return; // Static objects do not respond to forces
+	}
+
 	//Calculate Acceleration
 	glm::vec3 acceleration = force / mass;
 
 	//Calculate Velocity
 	velocity += acceleration * timeStep;
-
 }
 
 void PhysicsObject::CreateSphereCollider(float radius) {

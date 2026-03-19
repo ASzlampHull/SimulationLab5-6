@@ -26,12 +26,17 @@ void ScenarioPhysicsObjects::OnUnload()
 
 void ScenarioPhysicsObjects::CreatePhysicsObjects()
 {
+	int i = 0;
 	renderer->GetResourceManager().GetModels();
 	for (const auto& pair : renderer->GetResourceManager().GetModels()) {
 		const auto& model = pair.second;
 		Transformations transform = model.GetTransformations();
 		
-		physicsObjects.push_back(PhysicsObject(transform, glm::vec3(0.0f), 1.0f));
+		physicsObjects.push_back(PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), 1.0f));
+		if (i == 2) { // Make the plane static
+			physicsObjects.back() = PhysicsObject(transform, glm::vec3(0.0f), glm::vec3(0.0f), 1.0f, true);
+		}
+		i++;
 	}
 
 	physicsObjects[0].CreateSphereCollider(1.3f);
@@ -42,10 +47,7 @@ void ScenarioPhysicsObjects::CreatePhysicsObjects()
 void ScenarioPhysicsObjects::UpdatePhysicsObjects()
 {
 	glm::vec3 gravityForce = glm::vec3(0.0f, 9.81f, 0.0f);
-	for (size_t i = 0; i < physicsObjects.size(); ++i) {
-		if (i == 2) { // Only apply to first two spheres.
-			gravityForce = glm::vec3(0.0f);
-		}
+	for (size_t i = 0; i < physicsObjects.size(); ++i) {		
 		physicsObjects[i].Update(currentTimeStep, gravityForce);
 	}
 

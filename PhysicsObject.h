@@ -9,12 +9,15 @@ class PhysicsObject
 private:
 	Transformations transformations;
 	glm::vec3 velocity;
+	glm::vec3 angularVelocity;
 	float mass;
+	bool isStatic; // Add a flag to indicate if the object is static or dynamic
 	std::unique_ptr<Collider> collider; // Use smart pointer
 
 public:
-	PhysicsObject(Transformations transformations, glm::vec3 velocity, float mass) // TODO: Add bool to make static or dynamic object, and only apply forces if dynamic
-		: transformations(transformations), velocity(velocity), mass(mass) {
+	PhysicsObject(Transformations transformations, glm::vec3 velocity, glm::vec3 angularVelocity, float mass, bool isStatic = false)
+		: transformations(transformations), velocity(velocity), angularVelocity(angularVelocity), mass(mass), isStatic(isStatic)
+	{
 	}
 
 	void Update(float deltaTime, glm::vec3 force);
