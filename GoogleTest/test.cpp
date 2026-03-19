@@ -468,3 +468,78 @@ TEST(RotateSphereTest, Rotate360DegreesZ_ApplyToque) {
     EXPECT_NEAR(std::abs(dot), 1.0f, EPSILON);
 }
 #pragma endregion
+
+#pragma region RotateSphere Tests with ApplyAngularVelocity
+
+constexpr float EPSILON_ANGVEL = 0.4f;
+
+// X-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
+TEST(RotateSphereTest, ApplyAngularVelocity_XAxis_1_2_3_4_Seconds) {
+    float mass = 1.0f;
+    float radius = 1.0f;
+    glm::vec3 position(0.0f);
+    glm::vec3 velocity(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    glm::vec3 angularVelocity(glm::half_pi<float>(), 0.0f, 0.0f); // 90 deg/sec
+
+    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+
+    for (int i = 1; i <= 4; ++i) {
+        sphere.ApplyAngularVelocity(1.0f);
+
+        float angle = glm::half_pi<float>() * float(i);
+        glm::quat expectedOrientation = glm::angleAxis(angle, glm::vec3(1, 0, 0));
+        glm::quat actualOrientation = sphere.GetOrientation();
+
+        float dot = glm::dot(expectedOrientation, actualOrientation);
+        EXPECT_NEAR(std::abs(dot), 1.0f, EPSILON_ANGVEL) << "Failed at second " << i;
+    }
+}
+
+// Y-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
+TEST(RotateSphereTest, ApplyAngularVelocity_YAxis_1_2_3_4_Seconds) {
+    float mass = 1.0f;
+    float radius = 1.0f;
+    glm::vec3 position(0.0f);
+    glm::vec3 velocity(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    glm::vec3 angularVelocity(0.0f, glm::half_pi<float>(), 0.0f); // 90 deg/sec
+
+    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+
+    for (int i = 1; i <= 4; ++i) {
+        sphere.ApplyAngularVelocity(1.0f);
+
+        float angle = glm::half_pi<float>() * float(i);
+        glm::quat expectedOrientation = glm::angleAxis(angle, glm::vec3(0, 1, 0));
+        glm::quat actualOrientation = sphere.GetOrientation();
+
+        float dot = glm::dot(expectedOrientation, actualOrientation);
+        EXPECT_NEAR(std::abs(dot), 1.0f, EPSILON_ANGVEL) << "Failed at second " << i;
+    }
+}
+
+// Z-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
+TEST(RotateSphereTest, ApplyAngularVelocity_ZAxis_1_2_3_4_Seconds) {
+    float mass = 1.0f;
+    float radius = 1.0f;
+    glm::vec3 position(0.0f);
+    glm::vec3 velocity(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    glm::vec3 angularVelocity(0.0f, 0.0f, glm::half_pi<float>()); // 90 deg/sec
+
+    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+
+    for (int i = 1; i <= 4; ++i) {
+        sphere.ApplyAngularVelocity(1.0f);
+
+        float angle = glm::half_pi<float>() * float(i);
+        glm::quat expectedOrientation = glm::angleAxis(angle, glm::vec3(0, 0, 1));
+        glm::quat actualOrientation = sphere.GetOrientation();
+
+        float dot = glm::dot(expectedOrientation, actualOrientation);
+        EXPECT_NEAR(std::abs(dot), 1.0f, EPSILON_ANGVEL) << "Failed at second " << i;
+    }
+}
+
+#pragma endregion

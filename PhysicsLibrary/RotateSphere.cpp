@@ -18,3 +18,7 @@ void RotateSphere::AddAngularDisplacement(glm::vec3 angularDisplacement)
         orientation = glm::normalize(deltaOrientation * orientation);
     }
 }
+
+void RotateSphere::ApplyAngularVelocity(float deltaTime) {
+    AddAngularDisplacement(angularVelocity * deltaTime);
+}

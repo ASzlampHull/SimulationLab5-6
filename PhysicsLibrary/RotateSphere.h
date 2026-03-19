@@ -25,6 +25,7 @@ public:
 
     void ApplyToque(glm::vec3 torque, float deltaTime);
     void AddAngularDisplacement(glm::vec3 angularDisplacement);
+    void ApplyAngularVelocity(float deltaTime);
     
     const glm::vec3& GetAngularVelocity() const { return angularVelocity; }
 	const glm::quat& GetOrientation() const { return orientation; }

@@ -38,9 +38,12 @@ void PhysicsObject::ApplyAngularForces(float timeStep, glm::vec3 force)
 	if (isStatic) {
 		return; // Static objects do not respond to forces
 	}
+
+	angularVelocity = force;
+
 	RotateSphere sphere = RotateSphere(mass, 1.0f, transformations.position, velocity, orientation, angularVelocity);
 
-	sphere.ApplyToque(force, timeStep);
+	sphere.ApplyAngularVelocity(timeStep);
 	angularVelocity = sphere.GetAngularVelocity();
 	orientation = sphere.GetOrientation();
 }
