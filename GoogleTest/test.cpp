@@ -578,7 +578,7 @@ TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusProducesCorrectTorque) {
 	glm::vec3 lever(1.0f, 0.0f, 0.0f);
 	float radius = 1.0f;
 	float deltaTime = 1.0f;
-	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	rigidBody.AccumulateTorqueAndAngularAccelerationWithInertia(force, lever, deltaTime, radius);
 	glm::vec3 expectedTorque(0.0f, 0.0f, 10.0f);
 	glm::vec3 actualTorque = rigidBody.GetAccumulatedTorque();
 	EXPECT_NEAR(actualTorque.x, expectedTorque.x, TORQUE_EPSILON);
@@ -595,7 +595,7 @@ TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusProducesCorrectAngularAccelera
 	glm::vec3 lever(1.0f, 0.0f, 0.0f);
 	float radius = 1.0f;
 	float deltaTime = 1.0f;
-	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	rigidBody.AccumulateTorqueAndAngularAccelerationWithInertia(force, lever, deltaTime, radius);
 	float inertia = (2.0f / 5.0f) * mass * radius * radius;
 
 	glm::vec3 expectedAngularAcceleration = glm::vec3(0.0f, 0.0f, (10.0f / inertia));
@@ -615,7 +615,7 @@ TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusResultsInExpectedRotation) {
 	glm::vec3 lever(1.0f, 0.0f, 0.0f);
 	float radius = 1.0f;
 	float deltaTime = 2.0f;
-	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	rigidBody.AccumulateTorqueAndAngularAccelerationWithInertia(force, lever, deltaTime, radius);
 	glm::quat expectedOrientation = glm::angleAxis(glm::pi<float>(), glm::vec3(0, 0, 1));
 	glm::quat actualOrientation = rigidBody.GetOrientation();
 	float dot = glm::dot(expectedOrientation, actualOrientation);
@@ -637,7 +637,7 @@ TEST(ForceToTorqueWithRadiusAndDampingTest, TorqueWithRadiusAndDampingProducesCo
     float damping = 0.1f;
     float deltaTime = 1.0f;
 
-    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius, damping);
+    rigidBody.AccumulateTorqueAndAngularAccelerationWithInertiaTensor(force, lever, deltaTime, radius, damping);
 
     glm::vec3 expectedTorque(0.0f, 0.0f, 10.0f);
     glm::vec3 actualTorque = rigidBody.GetAccumulatedTorque();
@@ -658,7 +658,7 @@ TEST(ForceToTorqueWithRadiusAndDampingTest, TorqueWithRadiusAndDampingCorrectAng
     float damping = 0.1f;
     float deltaTime = 2.0f;
 
-    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius, damping);
+    rigidBody.AccumulateTorqueAndAngularAccelerationWithInertiaTensor(force, lever, deltaTime, radius, damping);
 
     glm::quat expectedOrientation = glm::angleAxis(glm::pi<float>() * (1 - damping), glm::vec3(0, 0, 1));
     glm::quat actualOrientation = rigidBody.GetOrientation();
@@ -677,7 +677,7 @@ TEST(ForceToTorqueWithRadiusAndDampingTest, TorqueWithRadiusAndDampingProducesCo
     float damping = 0.1f;
     float deltaTime = 1.0f;
 
-    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius, damping);
+    rigidBody.AccumulateTorqueAndAngularAccelerationWithInertiaTensor(force, lever, deltaTime, radius, damping);
     float inertia = (2.0f / 5.0f) * mass * radius * radius;
 
     glm::vec3 expectedAngularAcceleration = glm::vec3(0.0f, 0.0f, (10.0f / inertia) * (1 - damping));

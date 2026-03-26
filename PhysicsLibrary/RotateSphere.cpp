@@ -37,7 +37,7 @@ void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedF
 }
 
 // Overload that takes radius for inertia calculation (assuming solid sphere)
-void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius)
+void RigidBody::AccumulateTorqueAndAngularAccelerationWithInertia(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius)
 {
     float inertia = (2.0f / 5.0f) * mass * radius * radius;
     glm::vec3 leverArm = leverPoint - position;
@@ -51,7 +51,7 @@ void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedF
     AddAngularDisplacement(averageAngularVelocity * deltaTime);
 }
 
-void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius, float height)
+void RigidBody::AccumulateTorqueAndAngularAccelerationWithInertiaTensor(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius, float height)
 {
     // Calculate the principal moments of inertia for a solid cylinder along the Y-axis
     float I_x = (1.0f / 12.0f) * mass * (3.0f * radius * radius + height * height);

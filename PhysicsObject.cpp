@@ -42,7 +42,7 @@ void PhysicsObject::ApplyAngularForces(float timeStep, glm::vec3 force)
 
 	if (dynamic_cast<SphereCollider*>(collider.get()))
 	{
-		rigidBody.AccumulateTorqueAndAngularAcceleration(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep, dynamic_cast<SphereCollider*>(collider.get())->GetRadius());
+		rigidBody.AccumulateTorqueAndAngularAccelerationWithInertia(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep, dynamic_cast<SphereCollider*>(collider.get())->GetRadius());
 	}
 	else
 		rigidBody.AccumulateTorqueAndAngularAcceleration(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep);

@@ -64,7 +64,7 @@ void IMGUIManager::DisplayIMGUI(uint32_t currentFrame, float deltaTime, uint32_t
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	if (IsScenario("Default Scenario", renderer)) {
+	if (IsScenario("Default Scenario", renderer) || IsScenario("Physics Objects Scenario", renderer)) {
 		DisplayGraphicsDisplay(deltaTime, vertexCount);
 	}
 	DisplayMenus(renderer);
