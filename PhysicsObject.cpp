@@ -40,7 +40,12 @@ void PhysicsObject::ApplyAngularForces(float timeStep, glm::vec3 force)
 
 	rigidBody.UpdatePosition(transformations.position);
 
-	rigidBody.AccumulateTorqueAndAngularAcceleration(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep);
+	if (dynamic_cast<SphereCollider*>(collider.get()))
+	{
+		rigidBody.AccumulateTorqueAndAngularAcceleration(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep, dynamic_cast<SphereCollider*>(collider.get())->GetRadius());
+	}
+	else
+		rigidBody.AccumulateTorqueAndAngularAcceleration(force, glm::vec3(1.0f, 0.0f, 0.0f), timeStep);
 
 	angularVelocity = rigidBody.GetAngularVelocity();
 	orientation = rigidBody.GetOrientation();

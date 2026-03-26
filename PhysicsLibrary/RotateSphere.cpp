@@ -1,3 +1,4 @@
+#include "RotateSphere.h"
 #include "pch.h"
 #include "RotateSphere.h"
 
@@ -28,6 +29,20 @@ void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedF
     glm::vec3 torque = glm::cross(leverArm, appliedForce); // Torque = l x F (right-hand rule)
     accumulatedTorque += torque;
     angularAcceleration = accumulatedTorque / mass;
+
+    glm::vec3 initialAngularVelocity = angularVelocity;
+    angularVelocity += angularAcceleration * deltaTime;
+    glm::vec3 averageAngularVelocity = 0.5f * (initialAngularVelocity + angularVelocity);
+    AddAngularDisplacement(averageAngularVelocity * deltaTime);
+}
+
+void RigidBody::AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius)
+{
+    float inertia = (2.0f / 5.0f) * mass * radius * radius;
+    glm::vec3 leverArm = leverPoint - position;
+    glm::vec3 torque = glm::cross(leverArm, appliedForce); // Torque = l x F (right-hand rule)
+    accumulatedTorque += torque;
+    angularAcceleration = accumulatedTorque / inertia;
 
     glm::vec3 initialAngularVelocity = angularVelocity;
     angularVelocity += angularAcceleration * deltaTime;

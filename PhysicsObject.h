@@ -17,6 +17,7 @@ private:
 	bool isStatic; // Add a flag to indicate if the object is static or dynamic
 	std::unique_ptr<Collider> collider; // Use smart pointer
 	RigidBody rigidBody;
+	float accumulatedTime = 0.0f; // To track time for physics updates
 
 public:
 	PhysicsObject(Transformations transformations, glm::vec3 velocity, glm::vec3 angularVelocity, glm::quat orientation, float mass, bool isStatic = false)

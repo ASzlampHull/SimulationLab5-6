@@ -39,7 +39,8 @@ public:
     void ApplyToque(glm::vec3 torque, float deltaTime);
     void AddAngularDisplacement(glm::vec3 angularDisplacement);
     void ApplyAngularVelocity(float deltaTime);
-    void AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& contactPoint, float deltaTime);
+    void AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime);
+    void AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& leverPoint, float deltaTime, float radius);
     
 	void UpdatePosition(glm::vec3 newPosition) { position = newPosition; }
 

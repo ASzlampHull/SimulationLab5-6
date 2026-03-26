@@ -499,7 +499,6 @@ TEST(RotateSphereTest, ApplyAngularVelocity_ZAxis_1_2_3_4_Seconds) {
 
 #pragma endregion
 
-
 #pragma region RigidBody Tests with Torques
 
 const float TORQUE_EPSILON = 1e-4f;
@@ -564,6 +563,63 @@ TEST(ForceToTorqueTest, AngularVelocityResultsInExpectedRotation) {
 
     float dot = glm::dot(expectedOrientation, actualOrientation);
     EXPECT_NEAR(std::abs(dot), 1.0f, 0.4f);
+}
+
+#pragma endregion
+
+#pragma region RigidBody Tests with Force to Torque and Radius
+
+TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusProducesCorrectTorque) {
+	float mass = 2.0f;
+	glm::vec3 position(0.0f);
+	glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+	RigidBody rigidBody(mass, position, orientation);
+	glm::vec3 force(0.0f, 10.0f, 0.0f);
+	glm::vec3 lever(1.0f, 0.0f, 0.0f);
+	float radius = 1.0f;
+	float deltaTime = 1.0f;
+	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	glm::vec3 expectedTorque(0.0f, 0.0f, 10.0f);
+	glm::vec3 actualTorque = rigidBody.GetAccumulatedTorque();
+	EXPECT_NEAR(actualTorque.x, expectedTorque.x, TORQUE_EPSILON);
+	EXPECT_NEAR(actualTorque.y, expectedTorque.y, TORQUE_EPSILON);
+	EXPECT_NEAR(actualTorque.z, expectedTorque.z, TORQUE_EPSILON);
+}
+
+TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusProducesCorrectAngularAcceleration) {
+	float mass = 2.0f;
+	glm::vec3 position(0.0f);
+	glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+	RigidBody rigidBody(mass, position, orientation);
+	glm::vec3 force(0.0f, 10.0f, 0.0f);
+	glm::vec3 lever(1.0f, 0.0f, 0.0f);
+	float radius = 1.0f;
+	float deltaTime = 1.0f;
+	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	float inertia = (2.0f / 5.0f) * mass * radius * radius;
+
+	glm::vec3 expectedAngularAcceleration = glm::vec3(0.0f, 0.0f, (10.0f / inertia));
+	glm::vec3 actualAngularAcceleration = rigidBody.GetAngularAcceleration();
+
+	EXPECT_NEAR(actualAngularAcceleration.x, expectedAngularAcceleration.x, TORQUE_EPSILON);
+	EXPECT_NEAR(actualAngularAcceleration.y, expectedAngularAcceleration.y, TORQUE_EPSILON);
+	EXPECT_NEAR(actualAngularAcceleration.z, expectedAngularAcceleration.z, TORQUE_EPSILON);
+}
+
+TEST(ForceToTorqueWithRadiusTest, TorqueWithRadiusResultsInExpectedRotation) {
+	float mass = 2.0f;
+	glm::vec3 position(0.0f);
+	glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+	RigidBody rigidBody(mass, position, orientation);
+	glm::vec3 force(0.0f, 10.0f, 0.0f);
+	glm::vec3 lever(1.0f, 0.0f, 0.0f);
+	float radius = 1.0f;
+	float deltaTime = 2.0f;
+	rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime, radius);
+	glm::quat expectedOrientation = glm::angleAxis(glm::pi<float>(), glm::vec3(0, 0, 1));
+	glm::quat actualOrientation = rigidBody.GetOrientation();
+	float dot = glm::dot(expectedOrientation, actualOrientation);
+	EXPECT_NEAR(std::abs(dot), 1.0f, 0.4f);
 }
 
 #pragma endregion
