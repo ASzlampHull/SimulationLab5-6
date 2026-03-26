@@ -4,29 +4,47 @@
 #include <glm/gtc/quaternion.hpp>
 
 
-class RotateSphere
+class RigidBody
 {
 private:
-    float mass;
-    float radius;
 
-    glm::vec3 position;
-    glm::vec3 velocity;
+    float mass = 1.0f;
+    glm::vec3 position = glm::vec3(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 
-    glm::quat orientation;
-    glm::vec3 angularVelocity;
+	glm::vec3 velocity = glm::vec3(0.0f);
+	glm::vec3 angularAcceleration = glm::vec3(0.0f);
+	glm::vec3 angularVelocity = glm::vec3(0.0f);
+	glm::vec3 accumulatedTorque = glm::vec3(0.0f);
 
 public:
-	RotateSphere(float mass_, float radius_, glm::vec3 position_, glm::vec3 velocity_, glm::quat orientation_, glm::vec3 angularVelocity_)
-		: mass(mass_), radius(radius_), position(position_), velocity(velocity_), orientation(orientation_), angularVelocity(angularVelocity_)
+	RigidBody() = default;
+    RigidBody(const RigidBody& other)
+        : mass(other.mass),
+        position(other.position),
+        orientation(other.orientation),
+        velocity(other.velocity),
+        angularAcceleration(other.angularAcceleration),
+        angularVelocity(other.angularVelocity),
+        accumulatedTorque(other.accumulatedTorque)
+    {
+    }
+	RigidBody(float mass_, glm::vec3 position_, glm::quat orientation_)
+		: mass(mass_), position(position_), orientation(orientation_)
 	{
 	}
-	~RotateSphere() = default;
+
+	~RigidBody() = default;
 
     void ApplyToque(glm::vec3 torque, float deltaTime);
     void AddAngularDisplacement(glm::vec3 angularDisplacement);
     void ApplyAngularVelocity(float deltaTime);
+    void AccumulateTorqueAndAngularAcceleration(const glm::vec3& appliedForce, const glm::vec3& contactPoint, float deltaTime);
     
+	void UpdatePosition(glm::vec3 newPosition) { position = newPosition; }
+
     const glm::vec3& GetAngularVelocity() const { return angularVelocity; }
+	const glm::vec3& GetAngularAcceleration() const { return angularAcceleration; }
 	const glm::quat& GetOrientation() const { return orientation; }
+	const glm::vec3& GetAccumulatedTorque() const { return accumulatedTorque; }
 };

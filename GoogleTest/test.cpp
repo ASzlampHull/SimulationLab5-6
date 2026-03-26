@@ -192,13 +192,10 @@ constexpr float EPSILON = 0.4f;
 
 TEST(RotateSphereTest, Rotate90DegreesX_ApplyToque) {
 	float mass = 1.0f;
-	float radius = 1.0f;
 	glm::vec3 position(0.0f);
-	glm::vec3 velocity(0.0f);
 	glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-	glm::vec3 angularVelocity(0.0f);
 
-	RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+	RigidBody sphere(mass, position, orientation);
 
 	float angle = glm::half_pi<float>();
 	glm::vec3 torque(1.0f, 0.0f, 0.0f);
@@ -215,13 +212,10 @@ TEST(RotateSphereTest, Rotate90DegreesX_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate180DegreesX_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::pi<float>();
     glm::vec3 torque(1.0f, 0.0f, 0.0f);
@@ -238,13 +232,10 @@ TEST(RotateSphereTest, Rotate180DegreesX_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate270DegreesX_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = 3.0f * glm::half_pi<float>();
     glm::vec3 torque(1.0f, 0.0f, 0.0f);
@@ -261,13 +252,10 @@ TEST(RotateSphereTest, Rotate270DegreesX_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate360DegreesX_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::two_pi<float>();
     glm::vec3 torque(1.0f, 0.0f, 0.0f);
@@ -285,13 +273,10 @@ TEST(RotateSphereTest, Rotate360DegreesX_ApplyToque) {
 // Y-axis rotations
 TEST(RotateSphereTest, Rotate90DegreesY_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::half_pi<float>();
     glm::vec3 torque(0.0f, 1.0f, 0.0f);
@@ -308,13 +293,10 @@ TEST(RotateSphereTest, Rotate90DegreesY_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate180DegreesY_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::pi<float>();
     glm::vec3 torque(0.0f, 1.0f, 0.0f);
@@ -331,13 +313,10 @@ TEST(RotateSphereTest, Rotate180DegreesY_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate270DegreesY_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = 3.0f * glm::half_pi<float>();
     glm::vec3 torque(0.0f, 1.0f, 0.0f);
@@ -354,13 +333,10 @@ TEST(RotateSphereTest, Rotate270DegreesY_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate360DegreesY_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::two_pi<float>();
     glm::vec3 torque(0.0f, 1.0f, 0.0f);
@@ -378,13 +354,10 @@ TEST(RotateSphereTest, Rotate360DegreesY_ApplyToque) {
 // Z-axis rotations
 TEST(RotateSphereTest, Rotate90DegreesZ_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::half_pi<float>();
     glm::vec3 torque(0.0f, 0.0f, 1.0f);
@@ -401,13 +374,10 @@ TEST(RotateSphereTest, Rotate90DegreesZ_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate180DegreesZ_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::pi<float>();
     glm::vec3 torque(0.0f, 0.0f, 1.0f);
@@ -424,13 +394,10 @@ TEST(RotateSphereTest, Rotate180DegreesZ_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate270DegreesZ_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = 3.0f * glm::half_pi<float>();
     glm::vec3 torque(0.0f, 0.0f, 1.0f);
@@ -447,13 +414,10 @@ TEST(RotateSphereTest, Rotate270DegreesZ_ApplyToque) {
 
 TEST(RotateSphereTest, Rotate360DegreesZ_ApplyToque) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f);
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     float angle = glm::two_pi<float>();
     glm::vec3 torque(0.0f, 0.0f, 1.0f);
@@ -476,13 +440,10 @@ constexpr float EPSILON_ANGVEL = 0.4f;
 // X-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
 TEST(RotateSphereTest, ApplyAngularVelocity_XAxis_1_2_3_4_Seconds) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(glm::half_pi<float>(), 0.0f, 0.0f); // 90 deg/sec
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     for (int i = 1; i <= 4; ++i) {
         sphere.ApplyAngularVelocity(1.0f);
@@ -499,13 +460,10 @@ TEST(RotateSphereTest, ApplyAngularVelocity_XAxis_1_2_3_4_Seconds) {
 // Y-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
 TEST(RotateSphereTest, ApplyAngularVelocity_YAxis_1_2_3_4_Seconds) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f, glm::half_pi<float>(), 0.0f); // 90 deg/sec
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     for (int i = 1; i <= 4; ++i) {
         sphere.ApplyAngularVelocity(1.0f);
@@ -522,13 +480,10 @@ TEST(RotateSphereTest, ApplyAngularVelocity_YAxis_1_2_3_4_Seconds) {
 // Z-axis ApplyAngularVelocity for 1, 2, 3, 4 seconds
 TEST(RotateSphereTest, ApplyAngularVelocity_ZAxis_1_2_3_4_Seconds) {
     float mass = 1.0f;
-    float radius = 1.0f;
     glm::vec3 position(0.0f);
-    glm::vec3 velocity(0.0f);
     glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-    glm::vec3 angularVelocity(0.0f, 0.0f, glm::half_pi<float>()); // 90 deg/sec
 
-    RotateSphere sphere(mass, radius, position, velocity, orientation, angularVelocity);
+    RigidBody sphere(mass, position, orientation);
 
     for (int i = 1; i <= 4; ++i) {
         sphere.ApplyAngularVelocity(1.0f);
@@ -540,6 +495,75 @@ TEST(RotateSphereTest, ApplyAngularVelocity_ZAxis_1_2_3_4_Seconds) {
         float dot = glm::dot(expectedOrientation, actualOrientation);
         EXPECT_NEAR(std::abs(dot), 1.0f, EPSILON_ANGVEL) << "Failed at second " << i;
     }
+}
+
+#pragma endregion
+
+
+#pragma region RigidBody Tests with Torques
+
+const float TORQUE_EPSILON = 1e-4f;
+
+TEST(ForceToTorqueTest, ForceAtOffsetProducesCorrectTorque) {
+    float mass = 2.0f;
+    glm::vec3 position(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+
+    RigidBody rigidBody(mass, position, orientation);
+
+    glm::vec3 force(0.0f, 10.0f, 0.0f);
+    glm::vec3 lever(1.0f, 0.0f, 0.0f); // 1 unit along x from center
+
+    glm::vec3 expectedTorque(0.0f, 0.0f, 10.0f);
+	float deltaTime = 1.0f; // 1 second for simplicity
+
+    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime);
+
+    glm::vec3 actualTorque = rigidBody.GetAccumulatedTorque();
+    EXPECT_NEAR(actualTorque.x, expectedTorque.x, TORQUE_EPSILON);
+    EXPECT_NEAR(actualTorque.y, expectedTorque.y, TORQUE_EPSILON);
+    EXPECT_NEAR(actualTorque.z, expectedTorque.z, TORQUE_EPSILON);
+}
+
+TEST(ForceToTorqueTest, TorqueResultsInExpectedAngularAcceleration) {
+    float mass = 2.0f;
+    glm::vec3 position(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+
+    RigidBody rigidBody(mass, position, orientation);
+
+    glm::vec3 force(0.0f, 10.0f, 0.0f);
+    glm::vec3 lever(1.0f, 0.0f, 0.0f);
+    float deltaTime = 1.0f;
+
+    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime);
+
+    glm::vec3 expectedAngularAcceleration = glm::vec3(0.0f, 0.0f, 5.0f);
+
+    glm::vec3 actualAngularAcceleration = rigidBody.GetAngularAcceleration();
+    EXPECT_NEAR(actualAngularAcceleration.x, expectedAngularAcceleration.x, TORQUE_EPSILON);
+    EXPECT_NEAR(actualAngularAcceleration.y, expectedAngularAcceleration.y, TORQUE_EPSILON);
+    EXPECT_NEAR(actualAngularAcceleration.z, expectedAngularAcceleration.z, TORQUE_EPSILON);
+}
+
+TEST(ForceToTorqueTest, AngularVelocityResultsInExpectedRotation) {
+    float mass = 2.0f;
+    glm::vec3 position(0.0f);
+    glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+
+    RigidBody rigidBody(mass, position, orientation);
+
+    glm::vec3 force(0.0f, 10.0f, 0.0f);
+    glm::vec3 lever(1.0f, 0.0f, 0.0f);
+    float deltaTime = 2.0f;
+
+    rigidBody.AccumulateTorqueAndAngularAcceleration(force, lever, deltaTime);
+
+    glm::quat expectedOrientation = glm::angleAxis(glm::pi<float>(), glm::vec3(0, 0, 1));
+    glm::quat actualOrientation = rigidBody.GetOrientation();
+
+    float dot = glm::dot(expectedOrientation, actualOrientation);
+    EXPECT_NEAR(std::abs(dot), 1.0f, 0.4f);
 }
 
 #pragma endregion
